@@ -60,11 +60,6 @@ alias ..="cd .."
 alias ...="cd ../.."
 alias df="df -hl | grep -v shm | grep -v udev | grep -v tmpfs"
 alias h="history"
-if [ "$machine" == "Mac" ]; then
-    alias tm="tail -fn20 /var/log/system.log"
-else
-    alias tm="tail -fn20 /var/log/messages"
-fi
 alias nano="nano -w -T 4"
 alias mkcd="mkdir $1 && cd $1"
 
