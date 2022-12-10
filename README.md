@@ -1,5 +1,10 @@
 # zprofile
 
+## Download mit curl (empfohlen)
+```
+curl -o ~/.zprofile_ms https://raw.githubusercontent.com/matsahm/zprofile/master/.zprofile_ms
+```  
+
 ## Download mit wget
 ```
 wget -O ~/.zprofile_ms https://raw.githubusercontent.com/matsahm/zprofile/master/.zprofile_ms
