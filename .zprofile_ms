@@ -88,3 +88,4 @@ alias zp_update="echo 'Update läuft...' && curl --silent -o ~/.zprofile_ms http
 ### Version ausgeben ###
 if [ -t 1 ]; then 
     echo "zprofile by MS Version $zpmsver"
+fi
