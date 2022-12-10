@@ -1,0 +1,91 @@
+set -k
+
+###################################
+### DIESE DATEI NICHT VERÄNDERN ###
+### =========================== ###
+### Individuelle Einstellungen  ###
+### in .zprofile eintragen      ###
+###################################
+
+### System erkennen ###
+unameOut="$(uname -s)"
+case "${unameOut}" in
+    Linux*)     machine=Linux;;
+    Darwin*)    machine=Mac;;
+    CYGWIN*)    machine=Cygwin;;
+    MINGW*)     machine=MinGw;;
+    *)          machine="UNKNOWN:${unameOut}"
+esac
+
+### Systemupdate ###
+if [ -f /etc/debian_version ]; then
+        alias sysupdate="apt update && apt -y upgrade && apt -y autoremove"
+        alias flushdns="sudo systemd-resolve --flush-caches"
+elif [ -f /etc/redhat-release ]; then
+        alias sysupdate="yum update"
+        alias flushdns="echo Fehler: System bisher nicht unterstützt!"
+elif [ -f /etc/synoinfo.conf ]; then
+        alias sysupdate="synoupgrade --check && synoupgrade --download && synoupgrade --start"
+        alias flushdns="echo Fehler: System bisher nicht unterstützt!"
+elif [ -f /usr/local/bin/brew ]; then
+        alias sysupdate="softwareupdate -i -a; brew update; brew upgrade; brew upgrade --no-quarantine --cask --greedy; brew cleanup"
+        alias flushdns="sudo killall -HUP mDNSResponder"
+else
+        alias sysupdate="echo Fehler: System nicht erkannt!"
+fi
+
+### Allgemein ###
+zpmsver="1.0.0 $machine"
+alias zpmsver="echo $msver"
+export NCURSES_NO_UTF8_ACS=1
+
+### MOTD abschalten ###
+if [ ! -f ~/.hushlogin ]; then
+    touch ~/.hushlogin
+fi
+
+### Prompt anpassen ###
+export PROMPT='%n@%m %(?.%F{green}√.%F{red}?%?)%f %B%F{240}%1~%f%b %# '
+export CLICOLOR=1
+export GREP_COLOR='1;37;41'
+export GREP_OPTIONS='--color=auto'
+
+### Alias setzen ###
+alias ls="ls --group-directories-first --color -lAh"
+alias ..="cd .."
+alias ...="cd ../.."
+alias df="df -hl | grep -v shm | grep -v udev | grep -v tmpfs"
+alias h="history"
+if [ "$machine" == "Mac" ]; then
+    alias tm="tail -fn20 /var/log/system.log"
+else
+    alias tm="tail -fn20 /var/log/messages"
+fi
+alias nano="nano -w -T 4"
+alias mkcd="mkdir $1 && cd $1"
+
+### DOS Alias ###
+alias dir="ls --color -la"
+alias copy="cp"
+alias rename="mv"
+alias md="mkdir"
+alias rd="rmdir"
+alias del="rm"
+alias cls="clear"
+
+## Funktionen ###
+function mkcd() {
+	mkdir $1 && cd $1
+}
+
+### Editor setzen ###
+EDITOR=nano
+export EDITOR
+alias editor=$EDITOR
+
+### Update ###
+alias zp_update="echo 'Update läuft...' && curl --silent -o ~/.zprofile_ms https://raw.githubusercontent.com/matsahm/zprofile/master/.zprofile_ms > /dev/null && echo 'Fertig. Wird angewendet...' && . ~/.zprofile_ms"
+
+### Version ausgeben ###
+if [ -t 1 ]; then 
+    echo "zprofile by MS Version $zpmsver"
