@@ -31,7 +31,7 @@ elif [ -f /etc/redhat-release ]; then
 elif [ -f /etc/synoinfo.conf ]; then
         alias sysupdate="synoupgrade --check && synoupgrade --download && synoupgrade --start"
         alias flushdns="echo Fehler: System bisher nicht unterstützt!"
-elif [ -f /usr/local/bin/brew ]; then
+elif [ -f /usr/local/bin/brew ] || [ -f /opt/homebrew/bin/brew ] ; then
         alias sysupdate="softwareupdate -i -a; brew update; brew upgrade; brew upgrade --no-quarantine --cask --greedy; brew cleanup"
         alias flushdns="sudo killall -HUP mDNSResponder"
 else
