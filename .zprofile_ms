@@ -7,7 +7,8 @@ set -k
 ### in .zprofile eintragen      ###
 ### --------------------------  ###
 ### Beim Mac müssen die         ###
-### coreutils installiert sein! ###
+### coreutils und nano          ###
+### installiert sein!           ###
 ###################################
 
 ### System erkennen ###
