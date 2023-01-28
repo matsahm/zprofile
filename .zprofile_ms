@@ -85,7 +85,7 @@ export EDITOR
 alias editor=$EDITOR
 
 ### Update ###
-alias zp_update="echo 'Update läuft...' && curl --silent -o ~/.zprofile_ms https://raw.githubusercontent.com/matsahm/zprofile/master/.zprofile_ms > /dev/null && echo 'Fertig. Wird angewendet...' && . ~/.zprofile_ms"
+alias ms_update="echo 'Update läuft...' && curl --silent -o ~/.zprofile_ms https://raw.githubusercontent.com/matsahm/zprofile/master/.zprofile_ms > /dev/null && echo 'Fertig. Wird angewendet...' && . ~/.zprofile_ms"
 
 ### Version ausgeben ###
 if [ -t 1 ]; then 
