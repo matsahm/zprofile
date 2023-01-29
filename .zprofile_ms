@@ -34,12 +34,14 @@ elif [ -f /etc/synoinfo.conf ]; then
 elif [ -f /usr/local/bin/brew ] || [ -f /opt/homebrew/bin/brew ] ; then
         alias sysupdate="softwareupdate -i -a; brew update; brew upgrade; brew upgrade --no-quarantine --cask --greedy; brew cleanup"
         alias flushdns="sudo killall -HUP mDNSResponder"
+	alias bi="brew install"
+	alias bic="brew install --no-quarantine"
 else
         alias sysupdate="echo Fehler: System nicht erkannt!"
 fi
 
 ### Allgemein ###
-zpmsver="1.1.0 $machine"
+zpmsver="1.2.0 $machine"
 alias zpmsver="echo $msver"
 export NCURSES_NO_UTF8_ACS=1
 export HOMEBREW_NO_ENV_HINTS=1
