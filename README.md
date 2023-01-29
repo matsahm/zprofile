@@ -20,5 +20,5 @@ echo '. ~/.zshrc_ms' >> ~/.zshrc
 
 ## Update (benötigt curl)
 ```
-zp_update
+ms_update
 ```
